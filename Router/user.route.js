@@ -7,4 +7,4 @@ router.get("/find-user", cs.findAllUsers)
 router.put("/update/:id", cs.updateById)
 router.delete("/delete/:id", cs.deleteById)
 
-module.exports = router;
+module.exports = router; 

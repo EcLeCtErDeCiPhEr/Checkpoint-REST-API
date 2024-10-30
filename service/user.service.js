@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const userModel = require("../models/user.model");
+const mailSender = require("../util/mail.send")
 
 const createUser = (obj) => {
   try {
