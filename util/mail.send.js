@@ -2,19 +2,19 @@ var nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const mailSender = (emailTo) => {
-    var transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: `${process.env.email}` ,
-          pass: `${proess.env.email}`,
-        },
-      });
-      
-      var mailOptions = {
-        from:`${process.env.email}`,
-        to: `${emailTo}`,
-        subject: "Recruiting",
-        html: `<!DOCTYPE html>
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: `${process.env.email}`,
+      pass: `${process.env.pass}`,
+    },
+  });
+
+  var mailOptions = {
+    from: `${process.env.email}`,
+    to: `${emailTo}`,
+    subject: "Recruiting",
+    html: `<!DOCTYPE html>
       <html>
         <head>
           <style>
@@ -144,13 +144,14 @@ const mailSender = (emailTo) => {
        
       
       `,
-      };
-      
-      transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email sent: " + info.response);
-        }
-      });
-}
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+};
+module.exports = { mailSender };

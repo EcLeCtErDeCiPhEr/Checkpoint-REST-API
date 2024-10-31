@@ -1,6 +1,7 @@
 const userModel = require("../models/user.model");
 const userService = require("../service/user.service");
 const bcrypt = require("bcrypt");
+const mailSender = require("../util/mail.send");
 
 const createUser = async (req, res) => {
   const data = req.body;
@@ -8,13 +9,11 @@ const createUser = async (req, res) => {
   if (data.email === "") {
     return res.status(400).json({ msg: `Email required` });
   } else {
-    let emailValidator = email.include("@");
-    if (emailValidator) {
-      const result = await userService.createUser(data);
-      return res
-        .status(201)
-        .json({ msg: `user created sucessfully`, data: result });
-    }
+    const newUser = await userService.createUser(data);
+    mailSender.mailSender(newUser.email)
+    return res
+      .status(201)
+      .json({ msg: `user created sucessfully`, data: newUser });
   }
 };
 
